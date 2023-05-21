@@ -7,17 +7,20 @@ import (
 	"log"
 	"net"
 	"os"
+	"pnode/internal/service"
 	"pnode/pkg/peerscmd"
 	"strings"
 )
 
 type Server struct {
 	p peersmsg.Parser
+	s *service.Service
 }
 
-func NewServer(p peersmsg.Parser) *Server {
+func NewServer(p peersmsg.Parser, s *service.Service) *Server {
 	return &Server{
 		p: p,
+		s: s,
 	}
 }
 

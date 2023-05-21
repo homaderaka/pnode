@@ -3,6 +3,8 @@ package app
 import (
 	"github.com/homaderaka/peersmsg"
 	"pnode/internal/server"
+	"pnode/internal/service"
+	"pnode/internal/storage"
 )
 
 type App struct {
@@ -12,7 +14,11 @@ type App struct {
 func New() (app *App, err error) {
 	p := peersmsg.NewParser('\x00')
 
-	serv := server.NewServer(p)
+	s := storage.NewStorageRAM()
+
+	storageService := service.NewService(s)
+
+	serv := server.NewServer(p, storageService)
 
 	app = &App{s: serv}
 	return
