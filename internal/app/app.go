@@ -1,6 +1,7 @@
 package app
 
 import (
+	"context"
 	"github.com/homaderaka/peersmsg"
 	"pnode/internal/server"
 	"pnode/internal/service"
@@ -24,6 +25,6 @@ func New() (app *App, err error) {
 	return
 }
 
-func (app *App) Run() {
-	app.s.AcceptConnections()
+func (app *App) Run(c context.Context) {
+	app.s.AcceptConnections(c)
 }

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"log"
 	"pnode/internal/app"
 )
@@ -12,6 +13,8 @@ func main() {
 		log.Fatal(err)
 	}
 
-	a.Run()
+	c := context.Background()
+
+	a.Run(c)
 
 }
