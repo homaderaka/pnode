@@ -6,6 +6,7 @@ import (
 	"io"
 	"log"
 	"net"
+	"os"
 	"pnode/pkg/peerscmd"
 	"strings"
 )
@@ -21,7 +22,14 @@ func NewServer(p peersmsg.Parser) *Server {
 }
 
 func (s *Server) AcceptConnections() {
-	listen, err := net.Listen("tcp", "localhost:8001")
+	// TODO: replace with config
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8001" // Default port number if PORT environment variable is not set
+	}
+
+	listen, err := net.Listen("tcp", "localhost:"+port)
 	if err != nil {
 		log.Fatal(err)
 	}
