@@ -11,6 +11,13 @@ type RAM struct {
 	M        sync.RWMutex
 }
 
+func NewStorageRAM() Storage {
+	return &RAM{
+		Messages: make([]*peersmsg.Message, 0),
+		M:        sync.RWMutex{},
+	}
+}
+
 // GetMessages returns a slice of all stored messages.
 // Note: The returned messages should NOT be mutated.
 func (r *RAM) GetMessages(c context.Context) (m []*peersmsg.Message, err error) {
